@@ -5,7 +5,7 @@ import streamlit as st
 
 
 # Load dataset
-df = pd.read_csv('/Users/ACER/Submission/Dashboard/hour_clean.csv')
+df = pd.read_csv('Dashboard/hour_clean.csv')
 
 # Dashboard title
 st.set_page_config(page_title="Bike Sharing Dashboard", layout="wide")
