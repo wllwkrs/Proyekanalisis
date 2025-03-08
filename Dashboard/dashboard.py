@@ -2,8 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
-from babel.numbers import format_currency
-sns.set(style='dark')
+
 
 # Load dataset
 df = pd.read_csv('/Users/ACER/Submission/Dashboard/hour_clean.csv')
