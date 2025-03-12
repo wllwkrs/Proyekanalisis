@@ -4,7 +4,7 @@ import seaborn as sns
 import streamlit as st
 
 # Load dataset
-df = pd.read_csv('/mount/src/submission/Dashboard/hour_clean.csv')
+df = pd.read_csv('hour_clean.csv')
 
 # Konversi label kategorikal
 season_map = {1: "Spring", 2: "Summer", 3: "Fall", 4: "Winter"}
