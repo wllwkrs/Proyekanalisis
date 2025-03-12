@@ -2,8 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
-import os
-df = pd.read_csv(os.path.join(os.getcwd(), 'hour_cleaned.csv'))
+
+df = pd.read_csv('hour_cleaned.csv')
+
+
 # Konversi label kategorikal
 season_map = {1: "Spring", 2: "Summer", 3: "Fall", 4: "Winter"}
 weather_map = {1: "Cerah", 2: "Berawan", 3: "Hujan ringan", 4: "Hujan lebat"}
