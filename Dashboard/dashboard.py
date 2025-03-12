@@ -53,44 +53,36 @@ if selected_weather != "All":
     df_filtered = df_filtered[df_filtered["weather_label"] == selected_weather]
 df_filtered = df_filtered[df_filtered["hr"] == selected_hour]
 
-# Layout
-col1, col2 = st.columns(2)
-
-# Tren Peminjaman Sepeda
-with col1:
-    st.subheader("📈 Tren Peminjaman Sepeda")
-    fig, ax = plt.subplots(figsize=(8, 5))
-    sns.lineplot(data=df, x="hr", y="cnt", hue="mnth", palette="coolwarm", ax=ax)
-    ax.set_title("Peminjaman Sepeda berdasarkan Jam dan Bulan")
-    ax.set_xlabel("Jam")
-    ax.set_ylabel("Jumlah Peminjaman")
-    st.pyplot(fig)
-
-# Distribusi Peminjaman
-with col2:
-    st.subheader("📊 Distribusi Peminjaman")
-    fig, ax = plt.subplots(figsize=(8, 5))
-    sns.histplot(df["cnt"], bins=30, kde=True, color="skyblue", ax=ax)
-    ax.set_title("Distribusi Peminjaman Sepeda")
-    ax.set_xlabel("Jumlah Peminjaman")
-    st.pyplot(fig)
-
-# Peminjaman Sepeda Berdasarkan Musim
-st.subheader("🌤️ Peminjaman Sepeda Berdasarkan Musim")
-fig, ax = plt.subplots(figsize=(10, 5))
-sns.boxplot(data=df, x="season_label", y="cnt", palette="Set2", ax=ax)
-ax.set_title("Peminjaman Sepeda Berdasarkan Musim")
-ax.set_xlabel("Musim")
+# 1. Pengaruh Kondisi Cuaca terhadap Peminjaman Sepeda
+st.subheader("🌤️ Pengaruh Kondisi Cuaca terhadap Peminjaman Sepeda")
+fig, ax = plt.subplots(figsize=(8, 5))
+order = ["Cerah", "Berawan", "Hujan ringan", "Hujan lebat"]
+sns.barplot(x="weather_label", y="cnt", data=df, palette="viridis", estimator=sum, ci=None, order=order)
+ax.set_title("Distribusi Peminjaman Sepeda Berdasarkan Kondisi Cuaca")
+ax.set_xlabel("Kondisi Cuaca")
 ax.set_ylabel("Jumlah Peminjaman")
+plt.xticks(rotation=20)
 st.pyplot(fig)
 
-# Pengaruh Suhu terhadap Peminjaman Sepeda
-st.subheader("🌡️ Pengaruh Suhu terhadap Peminjaman Sepeda")
+# 2. Tren Peminjaman Sepeda dari Tahun 2011 ke 2012
+st.subheader("📈 Tren Peminjaman Sepeda per Bulan (2011 vs 2012)")
 fig, ax = plt.subplots(figsize=(10, 5))
-sns.scatterplot(data=df, x="temp_C", y="cnt", hue="weather_label", alpha=0.7, palette="coolwarm", ax=ax)
-ax.set_title("Hubungan antara Suhu dan Peminjaman Sepeda")
-ax.set_xlabel("Suhu (°C)")
+sns.lineplot(x="mnth", y="cnt", hue="yr", data=df, ci=None, marker="o", palette="muted")
+ax.set_title("Tren Peminjaman Sepeda per Bulan (2011 vs 2012)")
+ax.set_xlabel("Bulan")
 ax.set_ylabel("Jumlah Peminjaman")
+plt.xticks(ticks=range(1, 13), labels=["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"])
+ax.legend(title="Tahun", labels=["2011", "2012"])
+st.pyplot(fig)
+
+# 3. Pola Peminjaman Sepeda Berdasarkan Waktu
+st.subheader("🕒 Pola Peminjaman Sepeda Berdasarkan Jam")
+fig, ax = plt.subplots(figsize=(10, 5))
+sns.lineplot(x="hr", y="cnt", data=df, ci=None, marker="o", color="b")
+ax.set_title("Pola Peminjaman Sepeda Berdasarkan Jam")
+ax.set_xlabel("Jam")
+ax.set_ylabel("Jumlah Peminjaman")
+plt.xticks(ticks=range(0, 24))
 st.pyplot(fig)
 
 # Data Tersaring
