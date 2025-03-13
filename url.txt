@@ -1,1 +1,1 @@
-https://dashboardsubmissionwllwkrs.streamlit.app/
+https://wllwkrsdashboard.streamlit.app/
