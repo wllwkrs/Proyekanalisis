@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 
-df = pd.read_csv('hour_cleaned.csv')
+df = pd.read_csv('./hour_cleaned.csv')
 
 
 # Konversi label kategorikal
